@@ -17,15 +17,20 @@ def craps():
             dice_three = roll_a_dice
             dice_four = roll_a_dice
             sum = dice_three + dice_four
-            while sum != sum_one or sum != 7:
-                dice_three = roll_a_dice
-                dice_four = roll_a_dice
-                sum = dice_three + dice_four
-        return wins, games
-
+            while True:
+                if sum == sum_one:
+                    wins = wins + 1
+                    break
+                elif sum == 7:
+                    pass
+    return wins, games
 
 def main():
     wins, games = craps()
-    percentage = wins/games
-    print("You ")
+    loses = int(games) - int(wins)
+    percentage = int(wins)/int(games)
+    print("You played ", games, "games. You won ", wins, "games and lost ", loses, "games.")
     print("You won ", percentage, "percent of the time.")
+
+
+main()
