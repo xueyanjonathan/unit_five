@@ -1,5 +1,5 @@
 # Jonathan Lin
-# 10/17/2018
+# 10/18/2018
 # For and While loops
 # Using for and while loops to write a function modulling the craps game, and calculate the winning percentage
 
@@ -24,8 +24,8 @@ def craps():
     :return: number of wins and the total number of games.
     """
     wins = 0
-    games = input("How many games do you want to play?")
-    for x in range(int(games)):  # The beginning of the craps game.
+    games = int(input("How many games do you want to play?"))
+    for x in range(games):  # The beginning of the craps game.
         dice_one = roll_a_dice()
         dice_two = roll_a_dice()
         sum_one = dice_one + dice_two
@@ -33,24 +33,25 @@ def craps():
             wins = wins + 1  # If the user wins, the total number of wins adds 1.
         elif sum_one == 2 or sum_one == 3 or sum_one == 12:
             pass  # The user loses.
-        else:  # The user continues rolling until they roll the point(sum_one) again (they win)
+        else:
+            # The user continues rolling until they roll the point(sum_one) again (they win)
             # or they roll a 7 (they lose).
             while True:
                 dice_three = roll_a_dice()
                 dice_four = roll_a_dice()
-                sum = dice_three + dice_four
-                if sum == sum_one:
+                total = dice_three + dice_four
+                if total == sum_one:
                     wins = wins + 1
                     break  # The user wins and stops rolling the dice.
-                elif sum == 7:
+                elif total == 7:
                     break  # The user loses and stops rolling the dice.
     return wins, games
 
 
 def main():
     wins, games = craps()
-    loses = int(games) - int(wins)
-    percentage = int(wins)/int(games) * 100
+    loses = games - wins
+    percentage = wins / games * 100
     print("You played", games, "games. You won", wins, "games and lost", loses, "games.")
     print("You won", percentage, "percent of the time.")
 
